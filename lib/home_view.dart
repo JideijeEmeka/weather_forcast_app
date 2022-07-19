@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:task_weather_app/next_7_days_view.dart';
 import 'package:task_weather_app/weather_widget.dart';
 
@@ -16,9 +17,16 @@ class _HomeViewState extends State<HomeView> {
   bool changeNext7DaysTextColor = false;
 
   Color btnColor = Colors.red;
+  DateTime todayDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+
+    ///Date Format
+    String formattedDate =
+    DateFormat("EEE, dd MMM").format(todayDate);
+    //String formattedSuccessTime = DateFormat("kk:mm").format(todayDate);
+
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
@@ -46,7 +54,8 @@ class _HomeViewState extends State<HomeView> {
                     child: Text('United Kingdom', style: TextStyle(color: Colors.white,
                         fontSize: 30, fontWeight: FontWeight.w500),),
                   ),
-                  const Text('Sat, 6 Aug', style: TextStyle(color: Colors.white,
+                  Text(formattedDate,
+                    style: const TextStyle(color: Colors.white,
                       fontSize: 15),),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 100),
@@ -110,7 +119,7 @@ class _HomeViewState extends State<HomeView> {
                               changeTomorrowTextColor = false;
                               changeNext7DaysTextColor = true;
                             });
-                            Navigator.pushReplacement(context,
+                            Navigator.push(context,
                                 MaterialPageRoute(builder: (_) =>
                                 const Next7DaysView()));
                           },
