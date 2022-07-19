@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Next7DaysView extends StatefulWidget {
   const Next7DaysView({Key? key}) : super(key: key);
@@ -8,6 +11,30 @@ class Next7DaysView extends StatefulWidget {
 }
 
 class _Next7DaysViewState extends State<Next7DaysView> {
+
+  Map<String, dynamic> weather = {};
+
+  void getWeatherDetails() async {
+    String url = 'https://api.openweathermap.org/data/2.5/forecast?'
+        'lat=35&lon=139&appid=ed760b82998d2740aaf34512a60a70c9';
+    print('pressed API');
+    var response = await http.get(Uri.parse(url));
+    if(response.statusCode == 200) {
+      print(response.body);
+      setState(() {
+        weather = jsonDecode(response.body);
+      });
+    }else{
+      print('Error Somewhere');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getWeatherDetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +43,7 @@ class _Next7DaysViewState extends State<Next7DaysView> {
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: BackButton(onPressed: () {},
+        leading: BackButton(onPressed: () => Navigator.pop(context),
             color: Colors.black,),
       ),
       body: SingleChildScrollView(
@@ -40,7 +67,7 @@ class _Next7DaysViewState extends State<Next7DaysView> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Sunday', style: TextStyle(color: Colors.black.withOpacity(0.8),
+                                Text(weather['cnt'].toString(), style: TextStyle(color: Colors.black.withOpacity(0.8),
                                     fontSize: 20, fontWeight: FontWeight.w500),),
                                 Row(
                                   children: const [
