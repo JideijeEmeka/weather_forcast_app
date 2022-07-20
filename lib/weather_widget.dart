@@ -5,10 +5,10 @@ required String degrees}) {
   return Container(
     decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.red,
+        color: Colors.blue,
         borderRadius: BorderRadius.circular(35)
     ),
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
     margin: const EdgeInsets.only(
         right: 20, top: 30, bottom: 30),
     child: Column(
