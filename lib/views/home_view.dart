@@ -1,15 +1,14 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:task_weather_app/controller.dart';
-import 'package:task_weather_app/loader.dart';
-import 'package:task_weather_app/next_7_days_view.dart';
-import 'package:task_weather_app/weather_widget.dart';
+import 'package:task_weather_app/helpers/controller.dart';
+import 'package:task_weather_app/custom_widgets/loader.dart';
+import 'package:task_weather_app/views/next_7_days_view.dart';
+import 'package:task_weather_app/custom_widgets/weather_widget.dart';
 import 'package:http/http.dart' as http;
 
 class HomeView extends StatefulWidget {
@@ -82,12 +81,12 @@ class _HomeViewState extends StateMVC<HomeView> {
     });
   }
 
-  Map<String, dynamic> icons = {};
-
-  IconData getIconData(int iconPoint) {
-    return IconData(iconPoint,
-        fontFamily: 'MaterialIcons');
-  }
+  // Map<String, dynamic> icons = {};
+  //
+  // IconData getIconData(int iconPoint) {
+  //   return IconData(iconPoint,
+  //       fontFamily: 'MaterialIcons');
+  // }
 
   @override
   void initState() {
@@ -155,9 +154,9 @@ class _HomeViewState extends StateMVC<HomeView> {
                                 color: Colors.yellow, size: 80,) :
                               weather['list'][0]['main']['humidity'] <= 40 ?
                               const FaIcon(FontAwesomeIcons.cloudBolt,
-                                color: Colors.lightBlue, size: 80,) :
+                                color: Colors.white, size: 80,) :
                               const FaIcon(FontAwesomeIcons.cloudShowersHeavy,
-                                color: Colors.lightBlue, size: 80,) : Container(),
+                                color: Colors.white, size: 80,) : Container(),
                               weather.isNotEmpty ? Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(weather['list'][0]['main']['humidity'].toString() + '°',
@@ -215,7 +214,8 @@ class _HomeViewState extends StateMVC<HomeView> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (_) =>
                                 Next7DaysView(weather: weather,
-                                    loading: isLoading)));
+                                    loading: isLoading, getWeatherForecast: getWeatherDetails(_locationData!.latitude.toString(),
+                                      _locationData!.longitude.toString()),)));
                           },
                           child: Row(
                             children: [
@@ -252,24 +252,59 @@ class _HomeViewState extends StateMVC<HomeView> {
                   Padding(
                     padding: const EdgeInsets.only(left: 40),
                     child: weather.isNotEmpty ? weatherWidget(time: formattedTime,
-                        degrees: weather['list'][0]['main']['humidity'].toString() + '°')
+                        degrees: weather['list'][0]['main']['humidity'].toString() + '°',
+                        icon: weather['list'][0]['main']['humidity'] >= 65 ?
+                        const FaIcon(FontAwesomeIcons.sun,
+                          color: Colors.yellow,) :
+                        weather['list'][0]['main']['humidity'] <= 40 ?
+                        const FaIcon(FontAwesomeIcons.cloudBolt,
+                          color: Colors.white,) : const FaIcon(FontAwesomeIcons.cloudShowersHeavy,
+                          color: Colors.white,))
                 : Center(child: isLoading ?
-                loader() : Container(),),
+                loader() : Container())
                   ),
                  weather.isNotEmpty ? weatherWidget(time: formattedTime,
-                      degrees: weather['list'][1]['main']['humidity'].toString() + '°')
+                      degrees: weather['list'][1]['main']['humidity'].toString() + '°',
+                     icon: weather['list'][1]['main']['humidity'] >= 65 ?
+                     const FaIcon(FontAwesomeIcons.sun,
+                       color: Colors.yellow,) :
+                     weather['list'][1]['main']['humidity'] <= 40 ?
+                     const FaIcon(FontAwesomeIcons.cloudBolt,
+                       color: Colors.white,) : const FaIcon(FontAwesomeIcons.cloudShowersHeavy,
+                       color: Colors.white,))
                   : Center(child: isLoading ?
                  loader() : Container()),
                   weather.isNotEmpty ? weatherWidget(time: formattedTime,
-                      degrees: weather['list'][2]['main']['humidity'].toString() + '°')
+                      degrees: weather['list'][2]['main']['humidity'].toString() + '°',
+                      icon: weather['list'][2]['main']['humidity'] >= 65 ?
+                      const FaIcon(FontAwesomeIcons.sun,
+                        color: Colors.yellow,) :
+                      weather['list'][2]['main']['humidity'] <= 40 ?
+                      const FaIcon(FontAwesomeIcons.cloudBolt,
+                        color: Colors.white,) : const FaIcon(FontAwesomeIcons.cloudShowersHeavy,
+                        color: Colors.white,))
                   : Center(child: isLoading ?
                   loader() : Container()),
                   weather.isNotEmpty ? weatherWidget(time: formattedTime,
-                      degrees: weather['list'][3]['main']['humidity'].toString() + '°')
+                      degrees: weather['list'][3]['main']['humidity'].toString() + '°',
+                      icon: weather['list'][3]['main']['humidity'] >= 65 ?
+                      const FaIcon(FontAwesomeIcons.sun,
+                        color: Colors.yellow,) :
+                      weather['list'][3]['main']['humidity'] <= 40 ?
+                      const FaIcon(FontAwesomeIcons.cloudBolt,
+                        color: Colors.white,) : const FaIcon(FontAwesomeIcons.cloudShowersHeavy,
+                        color: Colors.white,))
                   : Center(child: isLoading ?
-                  loader() : Container(),),
+                  loader() : Container()),
                   weather.isNotEmpty ? weatherWidget(time: formattedTime,
-                      degrees: weather['list'][4]['main']['humidity'].toString() + '°')
+                      degrees: weather['list'][4]['main']['humidity'].toString() + '°',
+                      icon: weather['list'][4]['main']['humidity'] >= 65 ?
+                      const FaIcon(FontAwesomeIcons.sun,
+                        color: Colors.yellow) :
+                      weather['list'][4]['main']['humidity'] <= 40 ?
+                      const FaIcon(FontAwesomeIcons.cloudBolt,
+                        color: Colors.white,) : const FaIcon(FontAwesomeIcons.cloudShowersHeavy,
+                        color: Colors.white,))
                   : Center(child: isLoading ?
                   loader() : Container(),),
                 ],
