@@ -19,7 +19,7 @@ class _Next5DaysViewState extends State<Next5DaysView> {
   @override
   void initState() {
     super.initState();
-    widget.getWeatherForecast;
+    // widget.getWeatherForecast;
   }
 
   @override
