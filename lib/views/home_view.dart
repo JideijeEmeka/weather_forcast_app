@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:task_weather_app/helpers/constants.dart';
 import 'package:task_weather_app/helpers/controller.dart';
 import 'package:task_weather_app/custom_widgets/loader.dart';
 import 'package:task_weather_app/views/next_7_days_view.dart';
@@ -40,7 +41,7 @@ class _HomeViewState extends StateMVC<HomeView> {
 
   getWeatherDetails(String latitude, String longitude) async {
     String url = 'https://api.openweathermap.org/data/2.5/forecast?'
-        'lat=$latitude&lon=$longitude&appid=ed760b82998d2740aaf34512a60a70c9';
+        'lat=$latitude&lon=$longitude&appid=$kApiKey';
     setState(() {
       isLoading = true;
     });
@@ -173,8 +174,12 @@ class _HomeViewState extends StateMVC<HomeView> {
                             ],
                           ),
                         ),
+                        weather.isNotEmpty ? weather['list'][0]['main']['humidity'] >= 65 ?
                         const Text('Sunny', style: TextStyle(color: Colors.white,
-                            fontSize: 20),),
+                            fontSize: 20),) : weather['list'][0]['main']['humidity'] <= 40 ?
+                        const Text('Very Cloudy', style: TextStyle(color: Colors.white,
+                            fontSize: 20),) : const Text('Rainy', style: TextStyle(color: Colors.white,
+                            fontSize: 20),) : Container()
                       ],
                     ),
                   ),
@@ -214,7 +219,8 @@ class _HomeViewState extends StateMVC<HomeView> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (_) =>
                                 Next7DaysView(weather: weather,
-                                    loading: isLoading, getWeatherForecast: getWeatherDetails(_locationData!.latitude.toString(),
+                                    loading: isLoading, getWeatherForecast:
+                                  getWeatherDetails(_locationData!.latitude.toString(),
                                       _locationData!.longitude.toString()),)));
                           },
                           child: Row(
