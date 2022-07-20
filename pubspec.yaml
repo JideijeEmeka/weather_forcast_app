@@ -17,12 +17,14 @@ dependencies:
   http: ^0.13.4
   location: ^4.4.0
   mvc_pattern: any
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^1.0.0
+  test: ^1.21.1
 
 flutter:
   uses-material-design: true
@@ -30,7 +32,6 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
 
   # fonts:
   #   - family: Schyler
