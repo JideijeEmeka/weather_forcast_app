@@ -1,25 +1,20 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/date_symbol_data_file.dart';
-import 'package:location/location.dart';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-class Next7DaysView extends StatefulWidget {
+class Next5DaysView extends StatefulWidget {
   final Map weather;
   final bool loading;
   final Future getWeatherForecast;
-  const Next7DaysView({Key? key, required this.weather,
+  const Next5DaysView({Key? key, required this.weather,
     required this.loading, required this.getWeatherForecast}) : super(key: key);
 
   @override
-  State<Next7DaysView> createState() => _Next7DaysViewState();
+  State<Next5DaysView> createState() => _Next5DaysViewState();
 }
 
-class _Next7DaysViewState extends State<Next7DaysView> {
+class _Next5DaysViewState extends State<Next5DaysView> {
 
   @override
   void initState() {
@@ -51,7 +46,7 @@ class _Next7DaysViewState extends State<Next7DaysView> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Text('Next 7 Days', style: TextStyle(color: Colors.black.withOpacity(0.8),
+                child: Text('Next 5 Days', style: TextStyle(color: Colors.black.withOpacity(0.8),
                     fontSize: 30, fontWeight: FontWeight.w500),),
               ),
               widget.weather.isNotEmpty ?

@@ -8,7 +8,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:task_weather_app/helpers/constants.dart';
 import 'package:task_weather_app/helpers/controller.dart';
 import 'package:task_weather_app/custom_widgets/loader.dart';
-import 'package:task_weather_app/views/next_7_days_view.dart';
+import 'package:task_weather_app/views/next_5_days_view.dart';
 import 'package:task_weather_app/custom_widgets/weather_widget.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,7 +28,7 @@ class _HomeViewState extends StateMVC<HomeView> {
 
   bool changeTodayTextColor = false;
   bool changeTomorrowTextColor = false;
-  bool changeNext7DaysTextColor = false;
+  bool changeNext5DaysTextColor = false;
 
   Color btnColor = Colors.grey.shade300;
   DateTime todayDate = DateTime.now();
@@ -192,7 +192,7 @@ class _HomeViewState extends StateMVC<HomeView> {
                           setState(() {
                             changeTodayTextColor = true;
                             changeTomorrowTextColor = false;
-                            changeNext7DaysTextColor = false;
+                            changeNext5DaysTextColor = false;
                           });
                         },
                             child: Text('Today', style: TextStyle(color:
@@ -202,7 +202,7 @@ class _HomeViewState extends StateMVC<HomeView> {
                            setState(() {
                              changeTodayTextColor = false;
                              changeTomorrowTextColor = true;
-                             changeNext7DaysTextColor = false;
+                             changeNext5DaysTextColor = false;
                            });
                          },
                              child: Text('Tomorrow', style: TextStyle(color:
@@ -214,23 +214,23 @@ class _HomeViewState extends StateMVC<HomeView> {
                             setState(() {
                               changeTodayTextColor = false;
                               changeTomorrowTextColor = false;
-                              changeNext7DaysTextColor = true;
+                              changeNext5DaysTextColor = true;
                             });
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (_) =>
-                                Next7DaysView(weather: weather,
+                                Next5DaysView(weather: weather,
                                     loading: isLoading, getWeatherForecast:
                                   getWeatherDetails(_locationData!.latitude.toString(),
                                       _locationData!.longitude.toString()),)));
                           },
                           child: Row(
                             children: [
-                              Text('Next 7 Days', style: TextStyle(color:
-                              changeNext7DaysTextColor == true ? Colors.white :
+                              Text('Next 5 Days', style: TextStyle(color:
+                              changeNext5DaysTextColor == true ? Colors.white :
                               btnColor,
                                   fontSize: 20),),
                               Icon(Icons.arrow_right_alt_outlined, color:
-                              changeNext7DaysTextColor == true ? Colors.white :
+                              changeNext5DaysTextColor == true ? Colors.white :
                               btnColor,
                                 size: 30,)
                             ],
