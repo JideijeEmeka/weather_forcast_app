@@ -10,6 +10,10 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<String>This app needs access to location when in background</String>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<String>This app needs access to location when in usage</String>
 	<key>CFBundleName</key>
 	<string>task_weather_app</string>
 	<key>CFBundlePackageType</key>
