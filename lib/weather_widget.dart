@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget weatherWidget({required String time,
+Widget weatherWidget({required String time, required Widget icon,
 required String degrees}) {
   return Container(
     decoration: BoxDecoration(
@@ -16,10 +16,9 @@ required String degrees}) {
       children: [
         Text(time, style: const TextStyle(color: Colors.white,
             fontSize: 15),),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: Icon(Icons.cloud, color: Colors.white,
-            size: 30,),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: icon,
         ),
         Text(degrees, style: const TextStyle(color: Colors.white,
             fontSize: 20),),
