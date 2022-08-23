@@ -24,7 +24,6 @@ class _Next5DaysViewState extends State<Next5DaysView> {
 
   @override
   Widget build(BuildContext context) {
-
     ///Get days of the week
     var days = DateFormat.EEEE(Platform.localeName).dateSymbols.STANDALONEWEEKDAYS;
     print(days);
@@ -35,9 +34,10 @@ class _Next5DaysViewState extends State<Next5DaysView> {
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: BackButton(onPressed: () => Navigator.pop(context),
-            color: Colors.black,),
-      ),
+        leading: BackButton(
+            onPressed: () => Navigator.pop(context),
+            color: Colors.black
+        )),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.only(left: 30, right: 30),
