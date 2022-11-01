@@ -26,7 +26,7 @@ class _Next5DaysViewState extends State<Next5DaysView> {
   Widget build(BuildContext context) {
     ///Get days of the week
     var days = DateFormat.EEEE(Platform.localeName).dateSymbols.STANDALONEWEEKDAYS;
-    print(days);
+    debugPrint(days.toString());
 
     return Scaffold(
       backgroundColor: Colors.white,
